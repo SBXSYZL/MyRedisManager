@@ -129,7 +129,7 @@ public class Desktop extends JFrame {
             index.setLayout(null);
 
             //---- host ----
-            host.setText("47.97.42.155");
+            host.setText("");
             index.add(host);
             host.setBounds(580, 240, 285, 30);
 
@@ -157,7 +157,7 @@ public class Desktop extends JFrame {
             labelPassword.setBounds(500, 340, 75, 30);
 
             //---- password ----
-            password.setText("94763zl");
+            password.setText("");
             index.add(password);
             password.setBounds(580, 340, 285, 30);
 
