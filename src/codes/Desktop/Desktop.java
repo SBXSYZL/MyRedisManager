@@ -1,9 +1,9 @@
-package Desktop;
+package codes.Desktop;
 
 import javax.swing.table.*;
 
-import Redis.Entity;
-import Redis.RedisManager;
+import codes.Redis.Entity;
+import codes.Redis.RedisManager;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -161,14 +161,14 @@ public class Desktop extends JFrame {
             password.setBounds(580, 340, 285, 30);
 
             //---- testConnect ----
-            testConnect.setIcon(new ImageIcon(getClass().getResource("/icons/testConnect.png")));
+            testConnect.setIcon(new ImageIcon(getClass().getResource("/resources/icons/testConnect.png")));
             testConnect.setBackground(new Color(75, 75, 75));
             testConnect.addActionListener(e -> testConnectActionPerformed(e));
             index.add(testConnect);
             testConnect.setBounds(new Rectangle(new Point(600, 425), testConnect.getPreferredSize()));
 
             //---- complete ----
-            complete.setIcon(new ImageIcon(getClass().getResource("/icons/complete.png")));
+            complete.setIcon(new ImageIcon(getClass().getResource("/resources/icons/complete.png")));
             complete.setBackground(new Color(75, 75, 75));
             complete.addActionListener(e -> completeActionPerformed(e));
             index.add(complete);
@@ -827,8 +827,8 @@ public class Desktop extends JFrame {
                 }
             }
         });
-        confirm.setIcon(new ImageIcon(getClass().getResource("/icons/upload.png")));
-        cancel.setIcon(new ImageIcon(getClass().getResource("/icons/uploadCancel.png")));
+        confirm.setIcon(new ImageIcon(getClass().getResource("/resources/icons/upload.png")));
+        cancel.setIcon(new ImageIcon(getClass().getResource("/resources/icons/uploadCancel.png")));
         cancel.setBackground(new Color(75, 75, 75));
         confirm.setBackground(new Color(75, 75, 75));
         JPanel jPanel = new JPanel();

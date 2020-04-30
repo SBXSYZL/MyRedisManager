@@ -1,4 +1,4 @@
-package Redis;
+package codes.Redis;
 
 import java.io.Serializable;
 

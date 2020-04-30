@@ -7,7 +7,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="jedis-2.9.0" level="project" />
-    <orderEntry type="library" name="commons-pool2-2.8.0" level="project" />
+    <orderEntry type="library" name="commons-pool2-2.8.01" level="project" />
+    <orderEntry type="library" name="jedis-2.9.01" level="project" />
   </component>
 </module>

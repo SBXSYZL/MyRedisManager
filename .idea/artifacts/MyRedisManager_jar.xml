@@ -3,8 +3,8 @@
     <output-path>$PROJECT_DIR$/out/artifacts/MyRedisManager_jar</output-path>
     <root id="archive" name="MyRedisManager.jar">
       <element id="module-output" name="MyRedisManager" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/commons-pool2-2.8.0.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/jedis-2.9.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/resources/lib/commons-pool2-2.8.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/resources/lib/jedis-2.9.0.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>

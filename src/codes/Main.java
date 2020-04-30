@@ -1,4 +1,6 @@
-import Desktop.Desktop;
+package codes;
+
+import codes.Desktop.Desktop;
 
 /**
  * @description:
