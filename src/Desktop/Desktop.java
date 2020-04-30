@@ -1,18 +1,16 @@
 package Desktop;
 
-import javax.swing.event.*;
 import javax.swing.table.*;
 
 import Redis.Entity;
 import Redis.RedisManager;
-import javafx.scene.input.MouseButton;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.io.BufferedReader;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Set;
+import java.util.Timer;
+import java.util.TimerTask;
 import javax.swing.*;
 /*
  * Created by JFormDesigner on Wed Apr 29 13:16:38 GMT+08:00 2020
@@ -35,10 +33,11 @@ public class Desktop extends JFrame {
         String password = null;
         try {
             connect();
-            JOptionPane.showMessageDialog(null, "连接成功！");
+            JOptionPane.showMessageDialog(Desktop.this, "连接成功！");
+
         } catch (Exception ex) {
             ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "连接错误...");
+            JOptionPane.showMessageDialog(Desktop.this, "连接错误...");
         }
 
     }
@@ -56,7 +55,7 @@ public class Desktop extends JFrame {
             dbPage.setVisible(true);
         } catch (Exception ex) {
             ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "连接错误...");
+            JOptionPane.showMessageDialog(Desktop.this, "连接错误...");
         }
 
     }
@@ -129,7 +128,7 @@ public class Desktop extends JFrame {
             index.setLayout(null);
 
             //---- host ----
-            host.setText("");
+            host.setText("47.97.42.155");
             index.add(host);
             host.setBounds(580, 240, 285, 30);
 
@@ -157,7 +156,7 @@ public class Desktop extends JFrame {
             labelPassword.setBounds(500, 340, 75, 30);
 
             //---- password ----
-            password.setText("");
+            password.setText("94763zl");
             index.add(password);
             password.setBounds(580, 340, 285, 30);
 
@@ -206,14 +205,14 @@ public class Desktop extends JFrame {
             {
                 panelForDbs.setBackground(new Color(75, 75, 75));
                 panelForDbs.setLayout(null);
-                mouseListeners = new MouseListener[16];
+                mouseListeners = new MyMouseClickListener[16];
 
                 //---- db_01 ----
                 db_01.setText("db_01");
                 db_01.setBackground(new Color(75, 75, 75));
                 db_01.setForeground(Color.white);
                 db_01.setFont(new Font("Microsoft YaHei UI", Font.BOLD, 18));
-                mouseListeners[0] = new MouseDoubleClickListener(db_01);
+                mouseListeners[0] = new Desktop.MyMouseClickListener(db_01);
                 panelForDbs.add(db_01);
                 db_01.setBounds(20, 20, 242, 45);
 
@@ -222,7 +221,7 @@ public class Desktop extends JFrame {
                 db_02.setBackground(new Color(75, 75, 75));
                 db_02.setForeground(Color.white);
                 db_02.setFont(new Font("Microsoft YaHei UI", Font.BOLD, 18));
-                mouseListeners[1] = new MouseDoubleClickListener(db_02);
+                mouseListeners[1] = new Desktop.MyMouseClickListener(db_02);
                 panelForDbs.add(db_02);
                 db_02.setBounds(20, 70, 242, 45);
 
@@ -231,7 +230,7 @@ public class Desktop extends JFrame {
                 db_03.setBackground(new Color(75, 75, 75));
                 db_03.setForeground(Color.white);
                 db_03.setFont(new Font("Microsoft YaHei UI", Font.BOLD, 18));
-                mouseListeners[2] = new MouseDoubleClickListener(db_03);
+                mouseListeners[2] = new Desktop.MyMouseClickListener(db_03);
                 panelForDbs.add(db_03);
                 db_03.setBounds(20, 120, 242, 45);
 
@@ -240,7 +239,7 @@ public class Desktop extends JFrame {
                 db_04.setBackground(new Color(75, 75, 75));
                 db_04.setForeground(Color.white);
                 db_04.setFont(new Font("Microsoft YaHei UI", Font.BOLD, 18));
-                mouseListeners[3] = new MouseDoubleClickListener(db_04);
+                mouseListeners[3] = new Desktop.MyMouseClickListener(db_04);
                 panelForDbs.add(db_04);
                 db_04.setBounds(20, 170, 242, 45);
 
@@ -249,7 +248,7 @@ public class Desktop extends JFrame {
                 db_05.setBackground(new Color(75, 75, 75));
                 db_05.setForeground(Color.white);
                 db_05.setFont(new Font("Microsoft YaHei UI", Font.BOLD, 18));
-                mouseListeners[4] = new MouseDoubleClickListener(db_05);
+                mouseListeners[4] = new Desktop.MyMouseClickListener(db_05);
                 panelForDbs.add(db_05);
                 db_05.setBounds(20, 220, 242, 45);
 
@@ -258,7 +257,7 @@ public class Desktop extends JFrame {
                 db_06.setBackground(new Color(75, 75, 75));
                 db_06.setForeground(Color.white);
                 db_06.setFont(new Font("Microsoft YaHei UI", Font.BOLD, 18));
-                mouseListeners[5] = new MouseDoubleClickListener(db_06);
+                mouseListeners[5] = new Desktop.MyMouseClickListener(db_06);
                 panelForDbs.add(db_06);
                 db_06.setBounds(20, 270, 242, 45);
 
@@ -267,7 +266,7 @@ public class Desktop extends JFrame {
                 db_07.setBackground(new Color(75, 75, 75));
                 db_07.setForeground(Color.white);
                 db_07.setFont(new Font("Microsoft YaHei UI", Font.BOLD, 18));
-                mouseListeners[6] = new MouseDoubleClickListener(db_07);
+                mouseListeners[6] = new Desktop.MyMouseClickListener(db_07);
                 panelForDbs.add(db_07);
                 db_07.setBounds(20, 320, 242, 45);
 
@@ -276,7 +275,7 @@ public class Desktop extends JFrame {
                 db_08.setBackground(new Color(75, 75, 75));
                 db_08.setForeground(Color.white);
                 db_08.setFont(new Font("Microsoft YaHei UI", Font.BOLD, 18));
-                mouseListeners[7] = new MouseDoubleClickListener(db_08);
+                mouseListeners[7] = new Desktop.MyMouseClickListener(db_08);
                 panelForDbs.add(db_08);
                 db_08.setBounds(20, 370, 242, 45);
 
@@ -285,7 +284,7 @@ public class Desktop extends JFrame {
                 db_09.setBackground(new Color(75, 75, 75));
                 db_09.setForeground(Color.white);
                 db_09.setFont(new Font("Microsoft YaHei UI", Font.BOLD, 18));
-                mouseListeners[8] = new MouseDoubleClickListener(db_09);
+                mouseListeners[8] = new Desktop.MyMouseClickListener(db_09);
                 panelForDbs.add(db_09);
                 db_09.setBounds(20, 420, 242, 45);
 
@@ -294,7 +293,7 @@ public class Desktop extends JFrame {
                 db_10.setBackground(new Color(75, 75, 75));
                 db_10.setForeground(Color.white);
                 db_10.setFont(new Font("Microsoft YaHei UI", Font.BOLD, 18));
-                mouseListeners[9] = new MouseDoubleClickListener(db_10);
+                mouseListeners[9] = new Desktop.MyMouseClickListener(db_10);
                 panelForDbs.add(db_10);
                 db_10.setBounds(20, 470, 242, 45);
 
@@ -303,7 +302,7 @@ public class Desktop extends JFrame {
                 db_11.setBackground(new Color(75, 75, 75));
                 db_11.setForeground(Color.white);
                 db_11.setFont(new Font("Microsoft YaHei UI", Font.BOLD, 18));
-                mouseListeners[10] = new MouseDoubleClickListener(db_11);
+                mouseListeners[10] = new Desktop.MyMouseClickListener(db_11);
                 panelForDbs.add(db_11);
                 db_11.setBounds(20, 520, 242, 45);
 
@@ -312,7 +311,7 @@ public class Desktop extends JFrame {
                 db_12.setBackground(new Color(75, 75, 75));
                 db_12.setForeground(Color.white);
                 db_12.setFont(new Font("Microsoft YaHei UI", Font.BOLD, 18));
-                mouseListeners[11] = new MouseDoubleClickListener(db_12);
+                mouseListeners[11] = new Desktop.MyMouseClickListener(db_12);
                 panelForDbs.add(db_12);
                 db_12.setBounds(20, 570, 242, 45);
 
@@ -321,7 +320,7 @@ public class Desktop extends JFrame {
                 db_13.setBackground(new Color(75, 75, 75));
                 db_13.setForeground(Color.white);
                 db_13.setFont(new Font("Microsoft YaHei UI", Font.BOLD, 18));
-                mouseListeners[12] = new MouseDoubleClickListener(db_13);
+                mouseListeners[12] = new Desktop.MyMouseClickListener(db_13);
                 panelForDbs.add(db_13);
                 db_13.setBounds(20, 620, 242, 45);
 
@@ -330,7 +329,7 @@ public class Desktop extends JFrame {
                 db_14.setBackground(new Color(75, 75, 75));
                 db_14.setForeground(Color.white);
                 db_14.setFont(new Font("Microsoft YaHei UI", Font.BOLD, 18));
-                mouseListeners[13] = new MouseDoubleClickListener(db_14);
+                mouseListeners[13] = new Desktop.MyMouseClickListener(db_14);
                 panelForDbs.add(db_14);
                 db_14.setBounds(20, 670, 242, 45);
 
@@ -339,7 +338,7 @@ public class Desktop extends JFrame {
                 db_15.setBackground(new Color(75, 75, 75));
                 db_15.setForeground(Color.white);
                 db_15.setFont(new Font("Microsoft YaHei UI", Font.BOLD, 18));
-                mouseListeners[14] = new MouseDoubleClickListener(db_15);
+                mouseListeners[14] = new Desktop.MyMouseClickListener(db_15);
                 panelForDbs.add(db_15);
                 db_15.setBounds(20, 720, 242, 45);
 
@@ -348,7 +347,7 @@ public class Desktop extends JFrame {
                 db_16.setBackground(new Color(75, 75, 75));
                 db_16.setForeground(Color.white);
                 db_16.setFont(new Font("Microsoft YaHei UI", Font.BOLD, 18));
-                mouseListeners[15] = new MouseDoubleClickListener(db_16);
+                mouseListeners[15] = new Desktop.MyMouseClickListener(db_16);
                 panelForDbs.add(db_16);
                 db_16.setBounds(20, 770, 242, 45);
 
@@ -379,8 +378,7 @@ public class Desktop extends JFrame {
                 {
 
                     //---- data ----
-                    setTableModel(null, null, null);
-                    data.setModel(tableModel);
+                    createNewTableModel(null, null, null);
                     data.setFont(new Font("\u534e\u6587\u4e2d\u5b8b", Font.BOLD, 18));
                     data.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
                     data.setEnabled(false);
@@ -400,7 +398,8 @@ public class Desktop extends JFrame {
 
                     //---- value ----
                     value.setEditable(false);
-                    value.setEnabled(false);
+//                    value.setEnabled(false);
+                    value.setLineWrap(true);
                     value.setBackground(new Color(75, 75, 75));
                     value.setForeground(Color.white);
                     pairValue = "null";
@@ -446,7 +445,7 @@ public class Desktop extends JFrame {
                     keysList.setBackground(new Color(75, 75, 75));
                     keysList.setForeground(Color.white);
                     keysList.setSelectionBackground(new Color(203, 203, 203));
-                    MouseDoubleClickListener mouseDoubleClickListener = new MouseDoubleClickListener(keysList);
+                    Desktop.MyMouseClickListener mouseDoubleClickListener = new Desktop.MyMouseClickListener(keysList);
                     keysList.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 18));
                     scrollPane3.setViewportView(keysList);
                 }
@@ -536,9 +535,8 @@ public class Desktop extends JFrame {
             contentPane.setPreferredSize(preferredSize);
         }
         {
-            //popMenu
+            //popMenu,一次创建，避免资源浪费
             popupMenu = new JPopupMenu();
-            buttonGroup = new ButtonGroup();
             refresh = new JMenuItem("刷新");
             insert = new JMenuItem("新增");
             flushAll = new JMenuItem("清空");
@@ -555,6 +553,7 @@ public class Desktop extends JFrame {
 
         }
         setSize(1480, 900);
+        this.setResizable(false);
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
         dbPage.setVisible(false);
@@ -564,7 +563,8 @@ public class Desktop extends JFrame {
         this.setVisible(true);
     }
 
-    private void setTableModel(String key, String value, String ttl) {
+    //设置新的表格数据Model
+    private void createNewTableModel(String key, String value, String ttl) {
         tableModel = new DefaultTableModel(
                 new Object[][]{
                         {"key:", key},
@@ -575,6 +575,7 @@ public class Desktop extends JFrame {
                         null, null
                 }
         );
+        data.setModel(tableModel);
     }
 
 
@@ -625,64 +626,74 @@ public class Desktop extends JFrame {
     private DefaultListModel<String> keysListModel;
     private DefaultTableModel tableModel;
     private String pairValue;
-    private MouseListener[] mouseListeners;
+    private MyMouseClickListener[] mouseListeners;
     private JPopupMenu popupMenu;
-    private ButtonGroup buttonGroup;
     private JMenuItem refresh, insert, flushAll;
 
-    class MouseDoubleClickListener implements MouseListener {
+    //鼠标监听
+    class MyMouseClickListener implements MouseListener {
         private Component component;
 
-        public MouseDoubleClickListener(Component component) {
+        public MyMouseClickListener(Component component) {
             this.component = component;
             component.addMouseListener(this);
         }
 
         @Override
         public void mouseClicked(MouseEvent e) {
-//            System.out.println(e);
+            //双击事件
             if (e.getButton() == MouseEvent.BUTTON1 && e.getClickCount() == 2) {
                 try {
+                    /*DB菜单双击事件*/
                     if (component instanceof JButton) {
                         String db = ((JButton) component).getText();
 
                         int dbIndex = Integer.parseInt(db.substring(3));
-                        String switchResult = redisManager.useDb(dbIndex - 1);
-                        Thread.sleep(100);
+                        redisManager.useDb(dbIndex - 1);
                         getAllKeysFromDB();
+
                         currentDb.setText(db);
-                    } else if (component instanceof JList) {
+                        createNewTableModel(null, null, null);
+                        value.setText("null");
+                    }
+                    /*键值列表项双击事件*/
+                    else if (component instanceof JList) {
                         JList jList = (JList) component;
                         int keyIndex = jList.getSelectedIndex();
                         if (keyIndex >= 0) {
                             Entity entity = redisManager.select(currentKeys.get(keyIndex));
-//                            System.out.println(entity);
-                            setTableModel(entity.getKey(), entity.getValue().toString(), String.valueOf(entity.getTtl()));
+
+                            createNewTableModel(entity.getKey(), entity.getValue().toString(), String.valueOf(entity.getTtl()));
                             pairValue = entity.getValue().toString();
-                            data.setModel(tableModel);
                             value.setText(entity.toString());
                         }
-
-
                     }
                 } catch (Exception ex) {
                     ex.printStackTrace();
-                    JOptionPane.showMessageDialog(null, "数据错误...");
+                    createAutoCloseDialog("连接错误...");
                 }
 
-            } else if (e.getButton() == MouseEvent.BUTTON3 && component instanceof JButton && ((JButton) component).getText().equalsIgnoreCase(currentDb.getText())) {
+            }
+            /*DB菜单右键弹出菜单事件*/
+            else if (e.getButton() == MouseEvent.BUTTON3 && component instanceof JButton && ((JButton) component).getText().equalsIgnoreCase(currentDb.getText())) {
                 popupMenu.show(e.getComponent(), e.getComponent().getX() + e.getComponent().getWidth() - 20, (e.getComponent().getX()));
-//                JOptionPane.showMessageDialog(null, "右键菜单");
-            } else if (e.getButton() == MouseEvent.BUTTON3 && component instanceof JList) {
-                JList jList = (JList) component;
-                int keyIndex = jList.getSelectedIndex();
-                if (keyIndex >= 0) {
-                    int i = JOptionPane.showConfirmDialog(Desktop.this, "确定要删除这个键吗？");
-                    if (i == JOptionPane.YES_NO_OPTION) {
-                        redisManager.delete(currentKeys.get(keyIndex));
-                        getAllKeysFromDB();
+            }
+            /*键值列表项右键事件*/
+            else if (e.getButton() == MouseEvent.BUTTON3 && component instanceof JList) {
+                try {
+                    JList jList = (JList) component;
+                    int keyIndex = jList.getSelectedIndex();
+                    if (keyIndex >= 0) {
+                        int i = JOptionPane.showConfirmDialog(Desktop.this, "确定要删除这个键吗？");
+                        if (i == JOptionPane.YES_NO_OPTION) {
+                            redisManager.delete(currentKeys.get(keyIndex));
+                            getAllKeysFromDB();
+                        }
                     }
+                } catch (Exception ex) {
+                    createAutoCloseDialog("连接错误...");
                 }
+
             }
         }
 
@@ -707,22 +718,32 @@ public class Desktop extends JFrame {
         }
     }
 
+    //获取当前DB的所有键值
     private void getAllKeysFromDB() {
-        if (currentKeys != null) {
-            for (String key : currentKeys) {
-                keysListModel.removeElement(key);
+        try {
+            if (currentKeys != null) {
+                //循环移除，避免线程问题，带来一定效率问题
+                for (String key : currentKeys) {
+                    keysListModel.removeElement(key);
+                }
             }
-        }
-        Set<String> allKeys = redisManager.selectAllKeys();
-        currentKeys = new ArrayList<>();
-        for (String key : allKeys) {
-            currentKeys.add(key);
-            keysListModel.addElement(key);
+            Set<String> allKeys = redisManager.selectAllKeys();
+            currentKeys = new ArrayList<>();
+            //循环加入
+            for (String key : allKeys) {
+                currentKeys.add(key);
+                keysListModel.addElement(key);
+            }
+
+            keysCnt.setText(currentKeys.size() + "");
+        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(Desktop.this, "连接错误...");
+            createAutoCloseDialog("数据异常，请重试！");
         }
 
-        keysCnt.setText(currentKeys.size() + "");
     }
 
+    //弹出菜单监听器
     class PopMenuChildClickListener implements ActionListener {
         private JMenuItem component;
 
@@ -733,81 +754,116 @@ public class Desktop extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            /*刷新事件*/
             if (component.getText().equalsIgnoreCase("刷新")) {
                 getAllKeysFromDB();
-//                System.out.println("refresh");
-            } else if (component.getText().equalsIgnoreCase("新增")) {
-                JDialog dialog = new JDialog(Desktop.this, "新增", true);
-                dialog.setSize(450, 350);
-                dialog.setResizable(false);
-                int x = Desktop.this.getX() / 2 + Desktop.this.getWidth() / 2 - dialog.getWidth() / 2;
-                int y = Desktop.this.getY() / 2 + Desktop.this.getHeight() / 2 - dialog.getHeight() / 2;
-                dialog.setLocation(x, y);
-                JTextField key = new JTextField();
-                JTextField value = new JTextField();
-                JButton confirm = new JButton();
-                JButton cancel = new JButton();
-                cancel.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        dialog.dispose();
+            }
+            /*新增事件*/
+            else if (component.getText().equalsIgnoreCase("新增")) {
+                createMenuDialog();
+            }
+            /*清空事件*/
+            else if (component.getText().equalsIgnoreCase("清空")) {
+                try {
+                    int confirmDialog = JOptionPane.showConfirmDialog(Desktop.this, "确定要清空数据库吗？");
+                    if (confirmDialog == JOptionPane.YES_NO_OPTION) {
+                        redisManager.flushDB();
+                        getAllKeysFromDB();
                     }
-                });
-                confirm.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        String keyStr = key.getText();
-                        String valueStr = value.getText();
-                        if (keyStr == null || keyStr.length() <= 0 || valueStr == null || valueStr.length() <= 0) {
-                            JOptionPane.showMessageDialog(Desktop.this, "请将数据填写完整！");
-                            return;
-                        }
-                        int confirmDialog = JOptionPane.showConfirmDialog(Desktop.this, "确定要保存吗？");
-                        if (confirmDialog == JOptionPane.YES_NO_OPTION) {
-                            String insert = redisManager.insert(keyStr, valueStr);
-//                            System.out.println(insert);
-                            if (insert.equalsIgnoreCase("ok")) {
-                                dialog.dispose();
-                                JOptionPane.showMessageDialog(Desktop.this, "保存成功");
-                                getAllKeysFromDB();
-                            } else {
-                                JOptionPane.showMessageDialog(Desktop.this, "保存失败，请稍后重试..");
-                            }
-
-                        }
-
-                    }
-                });
-                confirm.setIcon(new ImageIcon(getClass().getResource("/icons/upload.png")));
-                cancel.setIcon(new ImageIcon(getClass().getResource("/icons/uploadCancel.png")));
-                cancel.setBackground(new Color(75, 75, 75));
-                confirm.setBackground(new Color(75, 75, 75));
-                JPanel jPanel = new JPanel();
-                jPanel.setBackground(new Color(75, 75, 75));
-                jPanel.setSize(250, 150);
-                jPanel.setLayout(null);
-                key.setBounds(40, 60, 180, 50);
-                key.setText("key");
-                jPanel.add(key);
-                jPanel.add(value);
-                value.setBounds(250, 60, 180, 50);
-                value.setText("value");
-                jPanel.add(confirm);
-                confirm.setBounds(100, 200, 80, 40);
-                jPanel.add(cancel);
-                cancel.setBounds(250, 200, 80, 40);
-                dialog.setContentPane(jPanel);
-                dialog.setVisible(true);
-//                System.out.println("insert");
-            } else if (component.getText().equalsIgnoreCase("清空")) {
-                int confirmDialog = JOptionPane.showConfirmDialog(Desktop.this, "确定要清空数据库吗？");
-                if (confirmDialog == JOptionPane.YES_NO_OPTION) {
-                    redisManager.flushDB();
-                    getAllKeysFromDB();
+                } catch (Exception ex) {
+                    createAutoCloseDialog("数据异常，请重试");
+//                    JOptionPane.showMessageDialog(Desktop.this, "连接错误...");
                 }
             }
-
-
         }
+    }
+
+    //创建新增键值对弹窗
+    private void createMenuDialog() {
+        JDialog dialog = new JDialog(Desktop.this, "新增", true);
+        dialog.setSize(450, 350);
+        dialog.setResizable(false);
+        int x = Desktop.this.getX() / 2 + Desktop.this.getWidth() / 2 - dialog.getWidth() / 2;
+        int y = Desktop.this.getY() / 2 + Desktop.this.getHeight() / 2 - dialog.getHeight() / 2;
+        dialog.setLocation(x, y);
+        JTextField key = new JTextField();
+        JTextField value = new JTextField();
+        JButton confirm = new JButton();
+        JButton cancel = new JButton();
+        cancel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dialog.dispose();
+            }
+        });
+        confirm.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    String keyStr = key.getText();
+                    String valueStr = value.getText();
+                    if (keyStr == null || keyStr.length() <= 0 || valueStr == null || valueStr.length() <= 0) {
+                        JOptionPane.showMessageDialog(Desktop.this, "请将数据填写完整！");
+                        return;
+                    }
+                    int confirmDialog = JOptionPane.showConfirmDialog(Desktop.this, "确定要保存吗？");
+                    if (confirmDialog == JOptionPane.YES_NO_OPTION) {
+                        String insert = redisManager.insert(keyStr, valueStr);
+//                            System.out.println(insert);
+                        if (insert.equalsIgnoreCase("ok")) {
+                            dialog.dispose();
+                            createAutoCloseDialog("保存成功");
+//                            JOptionPane.showMessageDialog(Desktop.this, "连接错误...");
+                            getAllKeysFromDB();
+                        } else {
+                            createAutoCloseDialog("保存失败，请稍后重试...");
+//                            JOptionPane.showMessageDialog(Desktop.this, "");
+                        }
+
+                    }
+                } catch (Exception ex) {
+                    createAutoCloseDialog("连接中...");
+//                    JOptionPane.showMessageDialog(Desktop.this, "数据异常，请重试");
+                }
+            }
+        });
+        confirm.setIcon(new ImageIcon(getClass().getResource("/icons/upload.png")));
+        cancel.setIcon(new ImageIcon(getClass().getResource("/icons/uploadCancel.png")));
+        cancel.setBackground(new Color(75, 75, 75));
+        confirm.setBackground(new Color(75, 75, 75));
+        JPanel jPanel = new JPanel();
+        jPanel.setBackground(new Color(75, 75, 75));
+        jPanel.setSize(250, 150);
+        jPanel.setLayout(null);
+        key.setBounds(40, 60, 180, 50);
+        key.setText("key");
+        jPanel.add(key);
+        jPanel.add(value);
+        value.setBounds(250, 60, 180, 50);
+        value.setText("value");
+        jPanel.add(confirm);
+        confirm.setBounds(100, 200, 80, 40);
+        jPanel.add(cancel);
+        cancel.setBounds(250, 200, 80, 40);
+        dialog.setContentPane(jPanel);
+        dialog.setVisible(true);
+    }
+
+    //创建自动关闭的弹窗
+    private void createAutoCloseDialog(String message) {
+        JOptionPane optionPane = new JOptionPane(message, JOptionPane.INFORMATION_MESSAGE);
+        JDialog dialog = optionPane.createDialog("异常");
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                dialog.setVisible(false);
+                dialog.dispose();
+            }
+        }, 1000);
+        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        dialog.setAlwaysOnTop(true);
+        dialog.setModal(false);
+        dialog.setVisible(true);
     }
 }
